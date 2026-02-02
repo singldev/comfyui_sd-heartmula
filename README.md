@@ -2,7 +2,7 @@
 
 Multilingual AI music generation nodes for ComfyUI powered by the HeartMuLa model family. Generate full songs with lyrics in English, Chinese, Japanese, Korean, Spanish and Russian.
 
-![Workflow Preview](assets/brave_screenshot.png)
+![Workflow Preview](assets/sd_heartmula.png)
 
 ## Features
 
