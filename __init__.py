@@ -32,7 +32,7 @@ def import_module_from_path(module_name, file_path):
 
 
 # Ensure heartlib is importable
-heartlib_path = os.path.join(current_dir, "heartlib")
+heartlib_path = os.path.join(current_dir, "sd_heartlib")
 if heartlib_path not in sys.path:
     sys.path.insert(0, current_dir)
 

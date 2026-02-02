@@ -70,7 +70,7 @@ class SD_HeartMuLa_Transcribe:
             sys.path.insert(0, str(_PACKAGE_ROOT))
 
         try:
-            from heartlib import HeartTranscriptorPipeline
+            from sd_heartlib import HeartTranscriptorPipeline
 
             models_dir = get_models_directory()
             transcriptor_path = models_dir / "HeartTranscriptor-oss"

@@ -62,7 +62,7 @@ def get_heartlib_path() -> Path:
     Returns:
         Path to heartlib directory within the node pack
     """
-    return Path(__file__).parent.parent / "heartlib"
+    return Path(__file__).parent.parent / "sd_heartlib"
 
 
 def get_package_root() -> Path:

@@ -301,7 +301,7 @@ def load_model(
         max_duration = 240000 # Default for custom
 
     # Import HeartMuLa pipeline
-    from heartlib import HeartMuLaGenPipeline
+    from sd_heartlib import HeartMuLaGenPipeline
 
     # Setup quantization config if needed
     bnb_config = None
