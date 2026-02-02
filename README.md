@@ -1,12 +1,12 @@
 # SD HeartMuLa
 
-Multilingual AI music generation nodes for ComfyUI powered by the HeartMuLa model family. Generate full songs with lyrics in English, Chinese, Japanese, Korean, Spanish and Russian.
+Multilingual AI music generation nodes for ComfyUI powered by the HeartMuLa model family. Generate full songs with lyrics in English, Chinese, Japanese, Korean, Spanish, and Russian.
 
 ![Workflow Preview](assets/sd_heartmula.png)
 
 ## Features
 
-- **Multilingual Lyrics** - Generate music with vocals in English, Chinese, Japanese, Korean, and Spanish
+- **Multilingual Lyrics** - Generate music with vocals in English, Chinese, Japanese, Korean, Spanish, and Russian
 - **Song Structure Control** - Use section markers like [Verse], [Chorus], [Bridge] to define song structure
 - **Style Tags** - Control genre, vocal type, mood, tempo, and instruments
 - **4-Minute Songs** - Generate up to 240 seconds of continuous audio
