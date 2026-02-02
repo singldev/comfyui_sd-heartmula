@@ -224,6 +224,7 @@ class HeartMuLaGenPipeline:
 
     @classmethod
     def from_pretrained(cls, pretrained_path: str, device: torch.device, torch_dtype: torch.dtype, version: str, codec_version: str = "oss", bnb_config=None, lazy_load=True):
+        print(f"[SD Debug] from_pretrained called with path='{pretrained_path}', version='{version}'")
         # Resolve Codec Path
         # 1. Try direct path or folder inside pretrained_path
         if os.path.exists(codec_version):
@@ -236,11 +237,16 @@ class HeartMuLaGenPipeline:
         
         # Check if version is a direct folder name
         direct_path = os.path.join(pretrained_path, version)
+        print(f"[SD Debug] Checking direct path: '{direct_path}', exists: {os.path.exists(direct_path)}, isdir: {os.path.isdir(direct_path)}")
         if os.path.isdir(direct_path):
             heartmula_path = direct_path
         else:
             # 动态匹配模型文件夹名称
-            if "RL" in version or "2026" in version:
+            print(f"[SD Debug] Direct path failed. Fallback logic triggered.")
+            
+            if version.startswith("HeartMuLa-"):
+                 heartmula_path = os.path.join(pretrained_path, version)
+            elif "RL" in version or "2026" in version:
                 # 匹配 HeartMuLa-RL-oss-3B-20260123 这种格式
                 heartmula_path = os.path.join(pretrained_path, f"HeartMuLa-{version}")
             else:
