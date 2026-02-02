@@ -35,8 +35,8 @@ Search for "SD HeartMuLa" and install.
 ### Manual
 ```bash
 cd ComfyUI/custom_nodes
-git clone https://github.com/filliptm/ComfyUI_SD-HeartMuLa.git
-cd ComfyUI_SD-HeartMuLa
+git clone https://github.com/singldev/comfyui_sd-heartmula.git
+cd comfyui_sd-heartmula
 pip install -r requirements.txt
 ```
 

@@ -43,7 +43,7 @@
         }
       ],
       "properties": {
-        "aux_id": "filliptm/ComfyUI_SD-HeartMuLa",
+        "aux_id": "singldev/ComfyUI_SD-HeartMuLa",
         "ver": "2cda3e353800781e26977e081c7a5f0b80c134d2",
         "Node name for S&R": "SD_HeartMuLa_Conditioning"
       },
@@ -90,7 +90,7 @@
         }
       ],
       "properties": {
-        "aux_id": "filliptm/ComfyUI_SD-HeartMuLa",
+        "aux_id": "singldev/ComfyUI_SD-HeartMuLa",
         "ver": "2cda3e353800781e26977e081c7a5f0b80c134d2",
         "Node name for S&R": "SD_HeartMuLa_TagsBuilder"
       },
@@ -142,7 +142,7 @@
         }
       ],
       "properties": {
-        "aux_id": "filliptm/ComfyUI_SD-HeartMuLa",
+        "aux_id": "singldev/ComfyUI_SD-HeartMuLa",
         "ver": "2cda3e353800781e26977e081c7a5f0b80c134d2",
         "Node name for S&R": "SD_HeartMuLa_Sampler"
       },
@@ -192,7 +192,7 @@
         }
       ],
       "properties": {
-        "aux_id": "filliptm/ComfyUI_SD-HeartMuLa",
+        "aux_id": "singldev/ComfyUI_SD-HeartMuLa",
         "ver": "2cda3e353800781e26977e081c7a5f0b80c134d2",
         "Node name for S&R": "SD_HeartMuLa_Decode"
       },
@@ -256,7 +256,7 @@
         }
       ],
       "properties": {
-        "aux_id": "filliptm/ComfyUI_SD-HeartMuLa",
+        "aux_id": "singldev/ComfyUI_SD-HeartMuLa",
         "ver": "0250dd186cf0114e5f6b037c24b78a595669e50c",
         "Node name for S&R": "SD_HeartMuLa_ModelLoader"
       },
