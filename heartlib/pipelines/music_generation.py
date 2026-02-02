@@ -224,8 +224,15 @@ class HeartMuLaGenPipeline:
 
     @classmethod
     def from_pretrained(cls, pretrained_path: str, device: torch.device, torch_dtype: torch.dtype, version: str, codec_version: str = "oss", bnb_config=None, lazy_load=True):
-        # 动态拼接 Codec 路径
-        heartcodec_path = os.path.join(pretrained_path, f"HeartCodec-{codec_version}")
+        # Resolve Codec Path
+        # 1. Try direct path or folder inside pretrained_path
+        if os.path.exists(codec_version):
+             heartcodec_path = codec_version
+        elif os.path.exists(os.path.join(pretrained_path, codec_version)):
+             heartcodec_path = os.path.join(pretrained_path, codec_version)
+        else:
+             # 2. Fallback to default naming convention
+             heartcodec_path = os.path.join(pretrained_path, f"HeartCodec-{codec_version}")
         
         # Check if version is a direct folder name
         direct_path = os.path.join(pretrained_path, version)

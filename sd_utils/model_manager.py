@@ -63,6 +63,25 @@ MODEL_VARIANTS = {
 }
 
 
+def get_available_codecs() -> list:
+    """Scan models directory for potential HeartCodec model folders."""
+    codecs = []
+    # Check all registered paths
+    for path in get_all_model_paths():
+        if path.exists():
+            try:
+                for item in path.iterdir():
+                    if item.is_dir():
+                        # Heuristic: Check name or config
+                        # We list all folders but maybe we should be smarter
+                        # or just list folders that contain "Codec" or "oss"
+                        if "Codec" in item.name:
+                            codecs.append(item.name)
+            except Exception:
+                pass
+    return sorted(list(set(["oss"] + codecs)))
+
+
 def get_available_models() -> list:
     """Scan models directory for potential HeartMuLa model folders."""
     models = []
@@ -74,9 +93,9 @@ def get_available_models() -> list:
                     if item.is_dir():
                         # Simple heuristic: check for config.json inside
                         if (item / "config.json").exists():
-                            # Avoid listing the codec itself as a model choice if possible,
-                            # but usually they are distinct. 
-                            models.append(item.name)
+                            # Don't list codecs as models if we can help it
+                            if "Codec" not in item.name:
+                                models.append(item.name)
             except Exception:
                 pass
     return sorted(list(set(models)))
@@ -87,6 +106,11 @@ def get_variant_list() -> list:
     defaults = list(MODEL_VARIANTS.keys())
     scanned = get_available_models()
     return sorted(list(set(defaults + scanned)))
+
+
+def get_codec_list() -> list:
+    """Get list of available codecs."""
+    return get_available_codecs()
 
 
 def get_variant_info(variant: str) -> dict:
@@ -203,6 +227,7 @@ def download_models_if_needed(
 
 def load_model(
     variant: str = "3B",
+    codec_name: str = "oss",
     precision: str = "auto",
     use_4bit: bool = False,
     force_reload: bool = False,
@@ -213,6 +238,7 @@ def load_model(
 
     Args:
         variant: Model variant (3B or 7B)
+        codec_name: Codec variant or folder name (default: "oss")
         precision: Precision mode (auto, fp32, fp16, bf16)
         use_4bit: Whether to use 4-bit quantization
         force_reload: Force reload even if cached
@@ -246,11 +272,11 @@ def load_model(
         dtype = torch.float16
 
     # Create cache key
-    cache_key = f"{variant}_{device}_{dtype}_{use_4bit}"
+    cache_key = f"{variant}_{codec_name}_{device}_{dtype}_{use_4bit}"
 
     # Return cached model if available
     if not force_reload and cache_key in _MODEL_CACHE:
-        print(f"[SD HeartMuLa] Using cached model: {variant}")
+        print(f"[SD HeartMuLa] Using cached model: {variant} (Codec: {codec_name})")
         return _MODEL_CACHE[cache_key]
 
     # Download models if needed (only for known variants)
@@ -300,7 +326,7 @@ def load_model(
                 bnb_config = None
 
     # Load the pipeline
-    print(f"[SD HeartMuLa] Loading HeartMuLa-{variant} pipeline...")
+    print(f"[SD HeartMuLa] Loading HeartMuLa-{variant} pipeline with codec {codec_name}...")
     try:
         # Try with dtype argument (older versions / local lib)
         pipeline = HeartMuLaGenPipeline.from_pretrained(
@@ -308,6 +334,7 @@ def load_model(
             device=device,
             dtype=dtype,
             version=variant,
+            codec_version=codec_name,
             bnb_config=bnb_config,
         )
     except TypeError as e:
@@ -321,6 +348,7 @@ def load_model(
                     device=device,
                     torch_dtype=dtype,
                     version=variant,
+                    codec_version=codec_name,
                     bnb_config=bnb_config,
                 )
             except TypeError as e2:
@@ -330,6 +358,7 @@ def load_model(
                     pretrained_path=str(models_dir),
                     device=device,
                     version=variant,
+                    codec_version=codec_name,
                     bnb_config=bnb_config,
                 )
                  # Set dtype manually if possible

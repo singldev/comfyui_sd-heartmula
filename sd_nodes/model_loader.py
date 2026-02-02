@@ -27,6 +27,7 @@ _model_manager = _import_from_package("model_manager", "model_manager")
 
 load_model = _model_manager.load_model
 get_variant_list = _model_manager.get_variant_list
+get_codec_list = _model_manager.get_codec_list
 get_variant_info = _model_manager.get_variant_info
 MODEL_VARIANTS = _model_manager.MODEL_VARIANTS
 clear_model_cache = _model_manager.clear_model_cache
@@ -53,6 +54,7 @@ class SD_HeartMuLa_ModelLoader:
     @classmethod
     def INPUT_TYPES(cls):
         variants = get_variant_list()
+        codecs = get_codec_list()
         return {
             "required": {
                 "model_version": (
@@ -60,6 +62,13 @@ class SD_HeartMuLa_ModelLoader:
                     {
                         "default": "3B",
                         "tooltip": "Model size. 3B is released and recommended."
+                    }
+                ),
+                "codec": (
+                    codecs,
+                    {
+                        "default": "oss",
+                        "tooltip": "Codec version or folder."
                     }
                 ),
             },
@@ -98,6 +107,7 @@ class SD_HeartMuLa_ModelLoader:
     def load_model(
         self,
         model_version: str,
+        codec: str,
         memory_mode: str = "auto",
         precision: str = "auto",
         use_4bit: bool = False,
@@ -108,6 +118,7 @@ class SD_HeartMuLa_ModelLoader:
 
         Args:
             model_version: Which model variant to load (3B or 7B)
+            codec: Codec version or folder
             memory_mode: Memory mode - "auto", "normal", "low", or "ultra"
             precision: Model precision mode
             use_4bit: Enable 4-bit quantization
@@ -143,6 +154,7 @@ class SD_HeartMuLa_ModelLoader:
         print(f"[SD HeartMuLa] Loading Model")
         print(f"{'='*60}")
         print(f"Version: {model_version}")
+        print(f"Codec: {codec}")
         print(f"Description: {variant_info['description']}")
         print(f"Max Duration: {variant_info['max_duration_ms'] // 1000}s")
         print(f"Languages: {', '.join(variant_info['languages'])}")
@@ -167,6 +179,7 @@ class SD_HeartMuLa_ModelLoader:
 
             model_info = load_model(
                 variant=model_version,
+                codec_name=codec,
                 precision=precision,
                 use_4bit=use_4bit,
                 force_reload=force_reload,
