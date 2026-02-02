@@ -39,15 +39,15 @@ if heartlib_path not in sys.path:
 # Import utilities first (needed by nodes)
 hm_paths = import_module_from_path(
     "hm_paths",
-    os.path.join(current_dir, "fl_utils", "paths.py")
+    os.path.join(current_dir, "sd_utils", "paths.py")
 )
 hm_audio_utils = import_module_from_path(
     "hm_audio_utils",
-    os.path.join(current_dir, "fl_utils", "audio_utils.py")
+    os.path.join(current_dir, "sd_utils", "audio_utils.py")
 )
 hm_model_manager = import_module_from_path(
     "hm_model_manager",
-    os.path.join(current_dir, "fl_utils", "model_manager.py")
+    os.path.join(current_dir, "sd_utils", "model_manager.py")
 )
 
 # Note: heartmula_wrapper.py removed in v2.0.0 - modular nodes use pipeline directly
@@ -55,27 +55,27 @@ hm_model_manager = import_module_from_path(
 # Import nodes
 hm_model_loader = import_module_from_path(
     "hm_model_loader",
-    os.path.join(current_dir, "fl_nodes", "model_loader.py")
+    os.path.join(current_dir, "sd_nodes", "model_loader.py")
 )
 hm_conditioning = import_module_from_path(
     "hm_conditioning",
-    os.path.join(current_dir, "fl_nodes", "conditioning.py")
+    os.path.join(current_dir, "sd_nodes", "conditioning.py")
 )
 hm_sampler = import_module_from_path(
     "hm_sampler",
-    os.path.join(current_dir, "fl_nodes", "sampler.py")
+    os.path.join(current_dir, "sd_nodes", "sampler.py")
 )
 hm_decode = import_module_from_path(
     "hm_decode",
-    os.path.join(current_dir, "fl_nodes", "decode.py")
+    os.path.join(current_dir, "sd_nodes", "decode.py")
 )
 hm_tags = import_module_from_path(
     "hm_tags",
-    os.path.join(current_dir, "fl_nodes", "tags_builder.py")
+    os.path.join(current_dir, "sd_nodes", "tags_builder.py")
 )
 hm_transcribe = import_module_from_path(
     "hm_transcribe",
-    os.path.join(current_dir, "fl_nodes", "transcribe.py")
+    os.path.join(current_dir, "sd_nodes", "transcribe.py")
 )
 
 # Get node classes

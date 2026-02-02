@@ -19,7 +19,7 @@ _PACKAGE_ROOT = os.path.dirname(os.path.dirname(__file__))
 # Import modules explicitly from our package to avoid conflicts
 def _import_from_package(module_name, file_name):
     """Import a module from our package specifically."""
-    module_path = os.path.join(_PACKAGE_ROOT, "fl_utils", f"{file_name}.py")
+    module_path = os.path.join(_PACKAGE_ROOT, "sd_utils", f"{file_name}.py")
     spec = importlib.util.spec_from_file_location(f"heartmula_{module_name}", module_path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
