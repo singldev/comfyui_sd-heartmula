@@ -114,10 +114,10 @@ __version__ = "2.0.2"
 
 # ASCII banner
 ascii_art = """
-⣏⡉ ⡇    ⣇⣸ ⢀⡀ ⢀⣀ ⡀⣀ ⣰⡀ ⡷⢾ ⡀⢀ ⡇  ⢀⣀
-⠇  ⠧⠤   ⠇⠸ ⠣⠭ ⠣⠼ ⠏  ⠘⠤ ⠇⠸ ⠣⠼ ⠧⠤ ⠣⠼
+⢀⣀ ⡏⡀    ⣇⣸ ⢀⡀ ⢀⣀ ⡀⣀ ⣰⡀ ⡷⢾ ⡀⢀ ⡇  ⢀⣀
+⠣⠼ ⠧⠤    ⠇⠸ ⠣⠭ ⠣⠼ ⠏  ⠘⠤ ⠇⠸ ⠣⠼ ⠧⠤ ⠣⠼
 """
-print(f"\033[35m{ascii_art}\033[0m")
+print(f"\033[31m{ascii_art}\033[0m")
 print(f"SD HeartMuLa v{__version__} - Multilingual AI Music Generation")
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]
