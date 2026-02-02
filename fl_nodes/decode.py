@@ -1,5 +1,5 @@
 """
-FL HeartMuLa Decode Node.
+SD HeartMuLa Decode Node.
 Decodes audio tokens into waveform using HeartCodec.
 """
 
@@ -31,7 +31,7 @@ tensor_to_comfyui_audio = _audio_utils.tensor_to_comfyui_audio
 empty_audio = _audio_utils.empty_audio
 
 
-class FL_HeartMuLa_Decode:
+class SD_HeartMuLa_Decode:
     """
     Decode audio tokens into waveform.
 
@@ -42,7 +42,7 @@ class FL_HeartMuLa_Decode:
     RETURN_TYPES = ("AUDIO",)
     RETURN_NAMES = ("audio",)
     FUNCTION = "decode"
-    CATEGORY = "FL HeartMuLa"
+    CATEGORY = "SD HeartMuLa"
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -79,7 +79,7 @@ class FL_HeartMuLa_Decode:
             Tuple containing ComfyUI AUDIO dict
         """
         print(f"\n{'='*60}")
-        print(f"[FL HeartMuLa] Decoding Audio")
+        print(f"[SD HeartMuLa] Decoding Audio")
         print(f"{'='*60}")
 
         pipeline = model["pipeline"]
@@ -109,12 +109,12 @@ class FL_HeartMuLa_Decode:
                     # Check if model is on GPU
                     param = next(pipeline.model.parameters())
                     if param.device.type != "cpu":
-                        print("[FL HeartMuLa] Offloading generation model to CPU to save VRAM...")
+                        print("[SD HeartMuLa] Offloading generation model to CPU to save VRAM...")
                         pipeline.model.to("cpu")
                         if torch.cuda.is_available():
                             torch.cuda.empty_cache()
                 except Exception as e:
-                    print(f"[FL HeartMuLa] Warning during offload: {e}")
+                    print(f"[SD HeartMuLa] Warning during offload: {e}")
 
             # Ensure codec is loaded (lazy loading support)
             if hasattr(pipeline, "load_heartcodec"):
@@ -137,7 +137,7 @@ class FL_HeartMuLa_Decode:
             return (audio,)
 
         except Exception as e:
-            print(f"[FL HeartMuLa] ERROR: Decoding failed!")
+            print(f"[SD HeartMuLa] ERROR: Decoding failed!")
             print(f"Error: {e}")
             import traceback
             traceback.print_exc()

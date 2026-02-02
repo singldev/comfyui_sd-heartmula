@@ -1,12 +1,12 @@
 """
-FL HeartMuLa Tags Builder Node.
+SD HeartMuLa Tags Builder Node.
 Builds style tags for HeartMuLa music generation.
 """
 
 from typing import Tuple
 
 
-class FL_HeartMuLa_TagsBuilder:
+class SD_HeartMuLa_TagsBuilder:
     """
     Build style tags for HeartMuLa music generation.
 
@@ -17,7 +17,7 @@ class FL_HeartMuLa_TagsBuilder:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("tags",)
     FUNCTION = "build_tags"
-    CATEGORY = "🎵FL HeartMuLa"
+    CATEGORY = "🎵SD HeartMuLa"
 
     # Genre options
     GENRES = [
@@ -162,6 +162,6 @@ class FL_HeartMuLa_TagsBuilder:
         # Join all tags
         tags_string = ",".join(tags)
 
-        print(f"[FL HeartMuLa] Built tags: {tags_string}")
+        print(f"[SD HeartMuLa] Built tags: {tags_string}")
 
         return (tags_string,)

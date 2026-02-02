@@ -1,4 +1,4 @@
-# FL HeartMuLa - Requirements
+# SD HeartMuLa - Requirements
 # Based on HeartLib dependencies
 
 # PyTorch (usually already installed with ComfyUI)

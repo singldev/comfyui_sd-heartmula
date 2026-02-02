@@ -1,5 +1,5 @@
 """
-FL HeartMuLa Transcribe Node.
+SD HeartMuLa Transcribe Node.
 Transcribe lyrics from audio using HeartTranscriptor.
 """
 
@@ -29,7 +29,7 @@ comfyui_audio_to_tensor = _audio_utils.comfyui_audio_to_tensor
 get_models_directory = _paths.get_models_directory
 
 
-class FL_HeartMuLa_Transcribe:
+class SD_HeartMuLa_Transcribe:
     """
     Transcribe lyrics from audio using HeartTranscriptor.
 
@@ -40,7 +40,7 @@ class FL_HeartMuLa_Transcribe:
     RETURN_TYPES = ("STRING",)
     RETURN_NAMES = ("lyrics",)
     FUNCTION = "transcribe"
-    CATEGORY = "🎵FL HeartMuLa"
+    CATEGORY = "🎵SD HeartMuLa"
 
     # Cache for the transcriptor pipeline
     _transcriptor_cache = None
@@ -60,10 +60,10 @@ class FL_HeartMuLa_Transcribe:
 
     def _load_transcriptor(self):
         """Load the HeartTranscriptor model."""
-        if FL_HeartMuLa_Transcribe._transcriptor_cache is not None:
-            return FL_HeartMuLa_Transcribe._transcriptor_cache
+        if SD_HeartMuLa_Transcribe._transcriptor_cache is not None:
+            return SD_HeartMuLa_Transcribe._transcriptor_cache
 
-        print("[FL HeartMuLa] Loading HeartTranscriptor...")
+        print("[SD HeartMuLa] Loading HeartTranscriptor...")
 
         # Add heartlib to path
         if str(_PACKAGE_ROOT) not in sys.path:
@@ -77,7 +77,7 @@ class FL_HeartMuLa_Transcribe:
 
             # Check if model exists
             if not transcriptor_path.exists():
-                print("[FL HeartMuLa] HeartTranscriptor not found, downloading...")
+                print("[SD HeartMuLa] HeartTranscriptor not found, downloading...")
                 from huggingface_hub import snapshot_download
                 snapshot_download(
                     repo_id="HeartMuLa/HeartTranscriptor-oss",
@@ -104,13 +104,13 @@ class FL_HeartMuLa_Transcribe:
                 # Fallback for older versions that don't require device/dtype
                 pipeline = HeartTranscriptorPipeline.from_pretrained(str(transcriptor_path))
 
-            FL_HeartMuLa_Transcribe._transcriptor_cache = pipeline
+            SD_HeartMuLa_Transcribe._transcriptor_cache = pipeline
 
-            print("[FL HeartMuLa] HeartTranscriptor loaded!")
+            print("[SD HeartMuLa] HeartTranscriptor loaded!")
             return pipeline
 
         except Exception as e:
-            print(f"[FL HeartMuLa] ERROR loading HeartTranscriptor: {e}")
+            print(f"[SD HeartMuLa] ERROR loading HeartTranscriptor: {e}")
             raise
 
     def transcribe(self, audio: dict) -> Tuple[str]:
@@ -124,7 +124,7 @@ class FL_HeartMuLa_Transcribe:
             Tuple containing transcribed lyrics string
         """
         print(f"\n{'='*60}")
-        print(f"[FL HeartMuLa] Transcribing Lyrics")
+        print(f"[SD HeartMuLa] Transcribing Lyrics")
         print(f"{'='*60}")
 
         try:
@@ -153,14 +153,14 @@ class FL_HeartMuLa_Transcribe:
             else:
                 lyrics = str(result)
 
-            print(f"[FL HeartMuLa] Transcription complete!")
+            print(f"[SD HeartMuLa] Transcription complete!")
             print(f"Transcribed: {lyrics[:200]}{'...' if len(lyrics) > 200 else ''}")
             print(f"{'='*60}\n")
 
             return (lyrics,)
 
         except Exception as e:
-            print(f"[FL HeartMuLa] ERROR: Transcription failed!")
+            print(f"[SD HeartMuLa] ERROR: Transcription failed!")
             print(f"Error: {e}")
             import traceback
             traceback.print_exc()

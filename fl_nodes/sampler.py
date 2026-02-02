@@ -1,5 +1,5 @@
 """
-FL HeartMuLa Sampler Node.
+SD HeartMuLa Sampler Node.
 Generates audio tokens from conditioning using autoregressive sampling.
 """
 
@@ -26,7 +26,7 @@ logging.getLogger("torchtune.models.gemma2._attention").setLevel(logging.ERROR)
 _PACKAGE_ROOT = os.path.dirname(os.path.dirname(__file__))
 
 
-class FL_HeartMuLa_Sampler:
+class SD_HeartMuLa_Sampler:
     """
     Generate audio tokens from conditioning.
 
@@ -37,7 +37,7 @@ class FL_HeartMuLa_Sampler:
     RETURN_TYPES = ("HEARTMULA_TOKENS",)
     RETURN_NAMES = ("audio_tokens",)
     FUNCTION = "sample"
-    CATEGORY = "FL HeartMuLa"
+    CATEGORY = "SD HeartMuLa"
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -135,7 +135,7 @@ class FL_HeartMuLa_Sampler:
             torch.mps.manual_seed(seed)
 
         print(f"\n{'='*60}")
-        print(f"[FL HeartMuLa] Sampling Audio Tokens")
+        print(f"[SD HeartMuLa] Sampling Audio Tokens")
         print(f"{'='*60}")
         print(f"Max Duration: {max_duration_sec}s")
         print(f"Temperature: {temperature}")
@@ -156,7 +156,7 @@ class FL_HeartMuLa_Sampler:
                 torch.cuda.empty_cache()
                 torch.cuda.synchronize()
                 allocated = torch.cuda.memory_allocated() / (1024**3)
-                print(f"[FL HeartMuLa] Ultra low mem: Starting with {allocated:.2f}GB VRAM allocated")
+                print(f"[SD HeartMuLa] Ultra low mem: Starting with {allocated:.2f}GB VRAM allocated")
 
         # Clamp duration
         max_duration_ms = min(max_duration_sec * 1000, max_duration_ms)
@@ -188,12 +188,12 @@ class FL_HeartMuLa_Sampler:
                     try:
                         param = next(pipeline.audio_codec.parameters())
                         if param.device.type != "cpu":
-                            print("[FL HeartMuLa] Offloading codec to CPU to free VRAM for generation...")
+                            print("[SD HeartMuLa] Offloading codec to CPU to free VRAM for generation...")
                             pipeline.audio_codec.to("cpu")
                             if torch.cuda.is_available():
                                 torch.cuda.empty_cache()
                     except Exception as e:
-                        print(f"[FL HeartMuLa] Warning during codec offload: {e}")
+                        print(f"[SD HeartMuLa] Warning during codec offload: {e}")
                 
                 pipeline.load_heartmula()
 
@@ -257,7 +257,7 @@ class FL_HeartMuLa_Sampler:
 
                 # Check for EOS token
                 if torch.any(curr_token[0:1, :] >= pipeline.config.audio_eos_id):
-                    print(f"[FL HeartMuLa] EOS detected at frame {i + 1}")
+                    print(f"[SD HeartMuLa] EOS detected at frame {i + 1}")
                     pbar.update_absolute(max_audio_frames)
                     break
 
@@ -267,7 +267,7 @@ class FL_HeartMuLa_Sampler:
             frames_tensor = torch.stack(frames).permute(1, 2, 0).squeeze(0)
 
             print(f"\n{'='*60}")
-            print(f"[FL HeartMuLa] Sampling Complete!")
+            print(f"[SD HeartMuLa] Sampling Complete!")
             print(f"Generated {len(frames)} frames ({len(frames) * 80 / 1000:.2f}s)")
             print(f"Token shape: {frames_tensor.shape}")
             print(f"{'='*60}\n")
@@ -297,6 +297,6 @@ class FL_HeartMuLa_Sampler:
                 if ultra_low_mem:
                     torch.cuda.synchronize()
                     allocated = torch.cuda.memory_allocated() / (1024**3)
-                    print(f"[FL HeartMuLa] Ultra low mem: Finished with {allocated:.2f}GB VRAM allocated")
+                    print(f"[SD HeartMuLa] Ultra low mem: Finished with {allocated:.2f}GB VRAM allocated")
             if torch.backends.mps.is_available():
                 torch.mps.empty_cache()

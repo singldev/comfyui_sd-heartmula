@@ -1,4 +1,4 @@
-# FL HeartMuLa
+# SD HeartMuLa
 
 Multilingual AI music generation nodes for ComfyUI powered by the HeartMuLa model family. Generate full songs with lyrics in English, Chinese, Japanese, Korean, and Spanish.
 
@@ -30,20 +30,20 @@ Multilingual AI music generation nodes for ComfyUI powered by the HeartMuLa mode
 ## Installation
 
 ### ComfyUI Manager
-Search for "FL HeartMuLa" and install.
+Search for "SD HeartMuLa" and install.
 
 ### Manual
 ```bash
 cd ComfyUI/custom_nodes
-git clone https://github.com/filliptm/ComfyUI_FL-HeartMuLa.git
-cd ComfyUI_FL-HeartMuLa
+git clone https://github.com/filliptm/ComfyUI_SD-HeartMuLa.git
+cd ComfyUI_SD-HeartMuLa
 pip install -r requirements.txt
 ```
 
 ## Quick Start
 
-1. Add **FL HeartMuLa Model Loader** and select `3B` model
-2. Connect to **FL HeartMuLa Conditioning** node
+1. Add **SD HeartMuLa Model Loader** and select `3B` model
+2. Connect to **SD HeartMuLa Conditioning** node
 3. Enter lyrics with section markers:
    ```
    [Verse]

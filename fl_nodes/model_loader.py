@@ -1,5 +1,5 @@
 """
-FL HeartMuLa Model Loader Node.
+SD HeartMuLa Model Loader Node.
 Loads the HeartMuLa music generation model with configurable options.
 """
 
@@ -37,7 +37,7 @@ get_available_vram_gb = _model_manager.get_available_vram_gb
 MEMORY_MODES = ["auto", "normal", "low", "ultra"]
 
 
-class FL_HeartMuLa_ModelLoader:
+class SD_HeartMuLa_ModelLoader:
     """
     Load HeartMuLa music generation model with variant selection and options.
 
@@ -48,7 +48,7 @@ class FL_HeartMuLa_ModelLoader:
     RETURN_TYPES = ("HEARTMULA_MODEL",)
     RETURN_NAMES = ("model",)
     FUNCTION = "load_model"
-    CATEGORY = "🎵FL HeartMuLa"
+    CATEGORY = "🎵SD HeartMuLa"
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -120,7 +120,7 @@ class FL_HeartMuLa_ModelLoader:
         if model_version == "7B":
             raise ValueError(
                 "\n" + "="*60 + "\n"
-                "[FL HeartMuLa] 7B Model Coming Soon!\n"
+                "[SD HeartMuLa] 7B Model Coming Soon!\n"
                 "="*60 + "\n"
                 "The 7B parameter model has not been released yet.\n"
                 "Please use the 3B model for now - it offers excellent quality!\n\n"
@@ -132,7 +132,7 @@ class FL_HeartMuLa_ModelLoader:
         if memory_mode == "auto":
             resolved_mode = get_recommended_memory_mode(model_version, use_4bit)
             available_vram = get_available_vram_gb()
-            print(f"[FL HeartMuLa] Auto-detected memory mode: {resolved_mode} (available VRAM: {available_vram:.1f}GB)")
+            print(f"[SD HeartMuLa] Auto-detected memory mode: {resolved_mode} (available VRAM: {available_vram:.1f}GB)")
         else:
             resolved_mode = memory_mode
 
@@ -140,7 +140,7 @@ class FL_HeartMuLa_ModelLoader:
         variant_info = get_variant_info(model_version)
 
         print(f"\n{'='*60}")
-        print(f"[FL HeartMuLa] Loading Model")
+        print(f"[SD HeartMuLa] Loading Model")
         print(f"{'='*60}")
         print(f"Version: {model_version}")
         print(f"Description: {variant_info['description']}")
@@ -179,12 +179,12 @@ class FL_HeartMuLa_ModelLoader:
             model_info["ultra_low_mem"] = resolved_mode == "ultra"
 
             pbar.update_absolute(4)
-            print(f"[FL HeartMuLa] Model loaded successfully!")
+            print(f"[SD HeartMuLa] Model loaded successfully!")
             return (model_info,)
 
         except FileNotFoundError as e:
             print(f"\n{'='*60}")
-            print(f"[FL HeartMuLa] ERROR: Model files not found!")
+            print(f"[SD HeartMuLa] ERROR: Model files not found!")
             print(f"{'='*60}")
             print(f"The model will be downloaded automatically from HuggingFace.")
             print(f"Expected location: ComfyUI/models/heartmula/")
@@ -192,5 +192,5 @@ class FL_HeartMuLa_ModelLoader:
             raise e
 
         except Exception as e:
-            print(f"[FL HeartMuLa] ERROR loading model: {e}")
+            print(f"[SD HeartMuLa] ERROR loading model: {e}")
             raise e

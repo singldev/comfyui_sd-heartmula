@@ -6,7 +6,7 @@
   "nodes": [
     {
       "id": 9,
-      "type": "FL_HeartMuLa_Conditioning",
+      "type": "SD_HeartMuLa_Conditioning",
       "pos": [
         -6082.799192543493,
         -3401.9256331182187
@@ -43,9 +43,9 @@
         }
       ],
       "properties": {
-        "aux_id": "filliptm/ComfyUI_FL-HeartMuLa",
+        "aux_id": "filliptm/ComfyUI_SD-HeartMuLa",
         "ver": "2cda3e353800781e26977e081c7a5f0b80c134d2",
-        "Node name for S&R": "FL_HeartMuLa_Conditioning"
+        "Node name for S&R": "SD_HeartMuLa_Conditioning"
       },
       "widgets_values": [
         "[Verse 1]\nFour in the morning and the ceiling's all I see\nRunning through the conversations that will never be\nDid I say too much or did I not say enough\nEvery little silence got me calling my own bluff\n[Prechorus]\nThe thoughts keep stacking up in rows\nWhere they end nobody knows\n[Chorus]\nRound and round the same old track\nSay it forward then I take it back\nLiving in the space between\nWhat I said and what I mean\n[Verse 2]\nCheck my phone again but nothing's even there\nBuilding up a crisis out of empty air\nReplay every word until it doesn't sound right\nTurning small decisions into battles every night\n[Prechorus]\nThe thoughts keep stacking up in rows\nWhere they end nobody knows\n[Chorus]\nRound and round the same old track\nSay it forward then I take it back\nLiving in the space between\nWhat I said and what I mean\n[Outro]\nLet it go\nLet it slow",
@@ -67,7 +67,7 @@
     },
     {
       "id": 3,
-      "type": "FL_HeartMuLa_TagsBuilder",
+      "type": "SD_HeartMuLa_TagsBuilder",
       "pos": [
         -6386.600206199754,
         -3116.0702141322413
@@ -90,9 +90,9 @@
         }
       ],
       "properties": {
-        "aux_id": "filliptm/ComfyUI_FL-HeartMuLa",
+        "aux_id": "filliptm/ComfyUI_SD-HeartMuLa",
         "ver": "2cda3e353800781e26977e081c7a5f0b80c134d2",
-        "Node name for S&R": "FL_HeartMuLa_TagsBuilder"
+        "Node name for S&R": "SD_HeartMuLa_TagsBuilder"
       },
       "widgets_values": [
         "disco",
@@ -108,7 +108,7 @@
     },
     {
       "id": 7,
-      "type": "FL_HeartMuLa_Sampler",
+      "type": "SD_HeartMuLa_Sampler",
       "pos": [
         -5730.653265526387,
         -3308.40928590279
@@ -142,9 +142,9 @@
         }
       ],
       "properties": {
-        "aux_id": "filliptm/ComfyUI_FL-HeartMuLa",
+        "aux_id": "filliptm/ComfyUI_SD-HeartMuLa",
         "ver": "2cda3e353800781e26977e081c7a5f0b80c134d2",
-        "Node name for S&R": "FL_HeartMuLa_Sampler"
+        "Node name for S&R": "SD_HeartMuLa_Sampler"
       },
       "widgets_values": [
         120,
@@ -158,7 +158,7 @@
     },
     {
       "id": 8,
-      "type": "FL_HeartMuLa_Decode",
+      "type": "SD_HeartMuLa_Decode",
       "pos": [
         -5677.72162316951,
         -3419.3421242423947
@@ -192,9 +192,9 @@
         }
       ],
       "properties": {
-        "aux_id": "filliptm/ComfyUI_FL-HeartMuLa",
+        "aux_id": "filliptm/ComfyUI_SD-HeartMuLa",
         "ver": "2cda3e353800781e26977e081c7a5f0b80c134d2",
-        "Node name for S&R": "FL_HeartMuLa_Decode"
+        "Node name for S&R": "SD_HeartMuLa_Decode"
       },
       "widgets_values": [],
       "color": "#16727c",
@@ -231,7 +231,7 @@
     },
     {
       "id": 13,
-      "type": "FL_HeartMuLa_ModelLoader",
+      "type": "SD_HeartMuLa_ModelLoader",
       "pos": [
         -6382.650162856404,
         -3345.4318405803715
@@ -256,9 +256,9 @@
         }
       ],
       "properties": {
-        "aux_id": "filliptm/ComfyUI_FL-HeartMuLa",
+        "aux_id": "filliptm/ComfyUI_SD-HeartMuLa",
         "ver": "0250dd186cf0114e5f6b037c24b78a595669e50c",
-        "Node name for S&R": "FL_HeartMuLa_ModelLoader"
+        "Node name for S&R": "SD_HeartMuLa_ModelLoader"
       },
       "widgets_values": [
         "3B",

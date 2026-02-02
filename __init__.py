@@ -1,5 +1,5 @@
 """
-FL HeartMuLa - Multilingual AI Music Generation for ComfyUI
+SD HeartMuLa - Multilingual AI Music Generation for ComfyUI
 Based on HeartMuLa/HeartLib music foundation model
 
 Generate complete songs with lyrics in English, Chinese, Japanese, Korean, and Spanish.
@@ -79,31 +79,31 @@ hm_transcribe = import_module_from_path(
 )
 
 # Get node classes
-FL_HeartMuLa_ModelLoader = hm_model_loader.FL_HeartMuLa_ModelLoader
-FL_HeartMuLa_Conditioning = hm_conditioning.FL_HeartMuLa_Conditioning
-FL_HeartMuLa_Sampler = hm_sampler.FL_HeartMuLa_Sampler
-FL_HeartMuLa_Decode = hm_decode.FL_HeartMuLa_Decode
-FL_HeartMuLa_TagsBuilder = hm_tags.FL_HeartMuLa_TagsBuilder
-FL_HeartMuLa_Transcribe = hm_transcribe.FL_HeartMuLa_Transcribe
+SD_HeartMuLa_ModelLoader = hm_model_loader.SD_HeartMuLa_ModelLoader
+SD_HeartMuLa_Conditioning = hm_conditioning.SD_HeartMuLa_Conditioning
+SD_HeartMuLa_Sampler = hm_sampler.SD_HeartMuLa_Sampler
+SD_HeartMuLa_Decode = hm_decode.SD_HeartMuLa_Decode
+SD_HeartMuLa_TagsBuilder = hm_tags.SD_HeartMuLa_TagsBuilder
+SD_HeartMuLa_Transcribe = hm_transcribe.SD_HeartMuLa_Transcribe
 
 # Node registration for ComfyUI
 NODE_CLASS_MAPPINGS = {
-    "FL_HeartMuLa_ModelLoader": FL_HeartMuLa_ModelLoader,
-    "FL_HeartMuLa_Conditioning": FL_HeartMuLa_Conditioning,
-    "FL_HeartMuLa_Sampler": FL_HeartMuLa_Sampler,
-    "FL_HeartMuLa_Decode": FL_HeartMuLa_Decode,
-    "FL_HeartMuLa_TagsBuilder": FL_HeartMuLa_TagsBuilder,
-    "FL_HeartMuLa_Transcribe": FL_HeartMuLa_Transcribe,
+    "SD_HeartMuLa_ModelLoader": SD_HeartMuLa_ModelLoader,
+    "SD_HeartMuLa_Conditioning": SD_HeartMuLa_Conditioning,
+    "SD_HeartMuLa_Sampler": SD_HeartMuLa_Sampler,
+    "SD_HeartMuLa_Decode": SD_HeartMuLa_Decode,
+    "SD_HeartMuLa_TagsBuilder": SD_HeartMuLa_TagsBuilder,
+    "SD_HeartMuLa_Transcribe": SD_HeartMuLa_Transcribe,
 }
 
 # Display names for the UI
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "FL_HeartMuLa_ModelLoader": "FL HeartMuLa Model Loader",
-    "FL_HeartMuLa_Conditioning": "FL HeartMuLa Conditioning",
-    "FL_HeartMuLa_Sampler": "FL HeartMuLa Sampler",
-    "FL_HeartMuLa_Decode": "FL HeartMuLa Decode",
-    "FL_HeartMuLa_TagsBuilder": "FL HeartMuLa Tags Builder",
-    "FL_HeartMuLa_Transcribe": "FL HeartMuLa Transcribe",
+    "SD_HeartMuLa_ModelLoader": "SD HeartMuLa Model Loader",
+    "SD_HeartMuLa_Conditioning": "SD HeartMuLa Conditioning",
+    "SD_HeartMuLa_Sampler": "SD HeartMuLa Sampler",
+    "SD_HeartMuLa_Decode": "SD HeartMuLa Decode",
+    "SD_HeartMuLa_TagsBuilder": "SD HeartMuLa Tags Builder",
+    "SD_HeartMuLa_Transcribe": "SD HeartMuLa Transcribe",
 }
 
 # Web directory for frontend extensions
@@ -118,6 +118,6 @@ ascii_art = """
 ⠇  ⠧⠤   ⠇⠸ ⠣⠭ ⠣⠼ ⠏  ⠘⠤ ⠇⠸ ⠣⠼ ⠧⠤ ⠣⠼
 """
 print(f"\033[35m{ascii_art}\033[0m")
-print(f"FL HeartMuLa v{__version__} - Multilingual AI Music Generation")
+print(f"SD HeartMuLa v{__version__} - Multilingual AI Music Generation")
 
 __all__ = ["NODE_CLASS_MAPPINGS", "NODE_DISPLAY_NAME_MAPPINGS", "WEB_DIRECTORY"]

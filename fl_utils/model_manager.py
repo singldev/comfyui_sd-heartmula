@@ -1,5 +1,5 @@
 """
-Model loading and caching for FL HeartMuLa.
+Model loading and caching for SD HeartMuLa.
 Handles downloading, caching, and loading of HeartMuLa models.
 """
 
@@ -139,7 +139,7 @@ def download_models_if_needed(
     # Download main model
     model_path = models_dir / f"HeartMuLa-oss-{variant}"
     if not model_path.exists():
-        print(f"[FL HeartMuLa] Downloading HeartMuLa-oss-{variant}...")
+        print(f"[SD HeartMuLa] Downloading HeartMuLa-oss-{variant}...")
         snapshot_download(
             repo_id=hf_repos["model"],
             local_dir=str(model_path),
@@ -152,7 +152,7 @@ def download_models_if_needed(
     # Download codec
     codec_path = models_dir / "HeartCodec-oss"
     if not codec_path.exists():
-        print("[FL HeartMuLa] Downloading HeartCodec-oss...")
+        print("[SD HeartMuLa] Downloading HeartCodec-oss...")
         snapshot_download(
             repo_id=hf_repos["codec"],
             local_dir=str(codec_path),
@@ -166,7 +166,7 @@ def download_models_if_needed(
     tokenizer_path = models_dir / "tokenizer.json"
     gen_config_path = models_dir / "gen_config.json"
     if not tokenizer_path.exists() or not gen_config_path.exists():
-        print("[FL HeartMuLa] Downloading config files...")
+        print("[SD HeartMuLa] Downloading config files...")
         snapshot_download(
             repo_id=hf_repos["config"],
             local_dir=str(models_dir),
@@ -229,11 +229,11 @@ def load_model(
 
     # Return cached model if available
     if not force_reload and cache_key in _MODEL_CACHE:
-        print(f"[FL HeartMuLa] Using cached model: {variant}")
+        print(f"[SD HeartMuLa] Using cached model: {variant}")
         return _MODEL_CACHE[cache_key]
 
     # Download models if needed
-    print(f"[FL HeartMuLa] Checking model files...")
+    print(f"[SD HeartMuLa] Checking model files...")
     models_dir = download_models_if_needed(variant, progress_callback)
 
     # Import HeartMuLa pipeline
@@ -244,8 +244,8 @@ def load_model(
     if use_4bit:
         # 4-bit quantization only works on CUDA (bitsandbytes requirement)
         if device.type != "cuda":
-            print(f"[FL HeartMuLa] WARNING: 4-bit quantization requires CUDA, but device is {device.type}")
-            print("[FL HeartMuLa] Disabling 4-bit quantization, using full precision instead")
+            print(f"[SD HeartMuLa] WARNING: 4-bit quantization requires CUDA, but device is {device.type}")
+            print("[SD HeartMuLa] Disabling 4-bit quantization, using full precision instead")
             use_4bit = False
         else:
             try:
@@ -256,13 +256,13 @@ def load_model(
                     bnb_4bit_use_double_quant=True,
                     bnb_4bit_quant_type="nf4",
                 )
-                print("[FL HeartMuLa] Using 4-bit quantization")
+                print("[SD HeartMuLa] Using 4-bit quantization")
             except ImportError:
-                print("[FL HeartMuLa] WARNING: bitsandbytes not installed, using full precision")
+                print("[SD HeartMuLa] WARNING: bitsandbytes not installed, using full precision")
                 bnb_config = None
 
     # Load the pipeline
-    print(f"[FL HeartMuLa] Loading HeartMuLa-{variant} pipeline...")
+    print(f"[SD HeartMuLa] Loading HeartMuLa-{variant} pipeline...")
     try:
         # Try with dtype argument (older versions / local lib)
         pipeline = HeartMuLaGenPipeline.from_pretrained(
@@ -275,7 +275,7 @@ def load_model(
     except TypeError as e:
         # Check if failure is due to 'dtype' arg
         if "dtype" in str(e) or "unexpected keyword argument" in str(e):
-            print("[FL HeartMuLa] 'dtype' arg failed, retrying with 'torch_dtype' (HeartMuLa_ComfyUI compatibility)...")
+            print("[SD HeartMuLa] 'dtype' arg failed, retrying with 'torch_dtype' (HeartMuLa_ComfyUI compatibility)...")
             try:
                 # Try with torch_dtype (HeartMuLa_ComfyUI lib)
                 pipeline = HeartMuLaGenPipeline.from_pretrained(
@@ -287,7 +287,7 @@ def load_model(
                 )
             except TypeError as e2:
                  # If that also fails, try without dtype (some other version)
-                 print(f"[FL HeartMuLa] 'torch_dtype' also failed ({e2}). Trying without explicit dtype...")
+                 print(f"[SD HeartMuLa] 'torch_dtype' also failed ({e2}). Trying without explicit dtype...")
                  pipeline = HeartMuLaGenPipeline.from_pretrained(
                     pretrained_path=str(models_dir),
                     device=device,
@@ -306,7 +306,7 @@ def load_model(
         try:
             actual_device = next(pipeline.model.parameters()).device
             if actual_device != device:
-                print(f"[FL HeartMuLa] Note: Model loaded on {actual_device} (requested {device})")
+                print(f"[SD HeartMuLa] Note: Model loaded on {actual_device} (requested {device})")
                 device = actual_device
         except Exception:
             pass # Use requested device if we can't determine actual
@@ -327,7 +327,7 @@ def load_model(
 
     # Cache the model
     _MODEL_CACHE[cache_key] = model_info
-    print(f"[FL HeartMuLa] Model loaded successfully!")
+    print(f"[SD HeartMuLa] Model loaded successfully!")
 
     return model_info
 
@@ -347,7 +347,7 @@ def clear_model_cache():
     if torch.backends.mps.is_available():
         torch.mps.empty_cache()
 
-    print("[FL HeartMuLa] Model cache cleared")
+    print("[SD HeartMuLa] Model cache cleared")
 
 
 def get_cache_info() -> dict:
@@ -415,5 +415,5 @@ def get_recommended_memory_mode(variant: str, use_4bit: bool = False) -> str:
     elif available_vram >= vram_low:
         return "low"
     else:
-        print(f"[FL HeartMuLa] Low VRAM detected ({available_vram:.1f}GB). Using ultra mode.")
+        print(f"[SD HeartMuLa] Low VRAM detected ({available_vram:.1f}GB). Using ultra mode.")
         return "ultra"

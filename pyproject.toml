@@ -1,6 +1,6 @@
 [project]
-name = "comfyui_fl-heartmula"
-description = "FL HeartMuLa - Multilingual AI music generation nodes for ComfyUI. Generate full songs with lyrics using the HeartMuLa model family. Supports English, Chinese, Japanese, Korean, and Spanish with song structure control via section markers and style tags."
+name = "comfyui_sd-heartmula"
+description = "SD HeartMuLa - Multilingual AI music generation nodes for ComfyUI. Generate full songs with lyrics using the HeartMuLa model family. Supports English, Chinese, Japanese, Korean, and Spanish with song structure control via section markers and style tags."
 version = "2.0.2"
 license = "Apache-2.0"
 dependencies = [
@@ -23,9 +23,9 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/filliptm/ComfyUI_FL-HeartMuLa"
+Repository = "https://github.com/singldev/comfyui_sd-heartmula"
 
 [tool.comfy]
 PublisherId = "machinedelusions"
-DisplayName = "FL HeartMuLa"
+DisplayName = "SD HeartMuLa"
 Icon = ""

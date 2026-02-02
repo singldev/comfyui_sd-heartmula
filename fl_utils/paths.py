@@ -1,5 +1,5 @@
 """
-Path utilities for FL HeartMuLa.
+Path utilities for SD HeartMuLa.
 Handles model directory resolution and package paths.
 """
 
@@ -67,10 +67,10 @@ def get_heartlib_path() -> Path:
 
 def get_package_root() -> Path:
     """
-    Get the root directory of the FL-HeartMuLa package.
+    Get the root directory of the SD-HeartMuLa package.
 
     Returns:
-        Path to ComfyUI_FL-HeartMuLa directory
+        Path to ComfyUI_SD-HeartMuLa directory
     """
     return Path(__file__).parent.parent
 

@@ -1,5 +1,5 @@
 /**
- * FL HeartMuLa Conditioning Node - Custom Frontend Extension
+ * SD HeartMuLa Conditioning Node - Custom Frontend Extension
  * Adds a popup lyrics editor with section buttons for easy song structure building.
  *
  * Uses a modal popup approach for compatibility with both Legacy and V2 modes.
@@ -416,14 +416,14 @@ app.registerExtension({
     name: "FL.HeartMuLa.Conditioning",
 
     async nodeCreated(node) {
-        if (node.comfyClass !== "FL_HeartMuLa_Conditioning") {
+        if (node.comfyClass !== "SD_HeartMuLa_Conditioning") {
             return;
         }
 
         // Find the lyrics widget
         const lyricsWidget = node.widgets?.find(w => w.name === "lyrics");
         if (!lyricsWidget) {
-            console.warn("[FL HeartMuLa] Could not find lyrics widget");
+            console.warn("[SD HeartMuLa] Could not find lyrics widget");
             return;
         }
 
@@ -433,10 +433,10 @@ app.registerExtension({
             modal.show();
         });
 
-        console.log("[FL HeartMuLa] Lyrics editor button added");
+        console.log("[SD HeartMuLa] Lyrics editor button added");
     },
 
     async setup() {
-        console.log("[FL HeartMuLa] Frontend extension loaded");
+        console.log("[SD HeartMuLa] Frontend extension loaded");
     }
 });

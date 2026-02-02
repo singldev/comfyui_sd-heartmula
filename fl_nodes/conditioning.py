@@ -1,5 +1,5 @@
 """
-FL HeartMuLa Conditioning Node.
+SD HeartMuLa Conditioning Node.
 Tokenizes lyrics and tags into conditioning tensors for generation.
 """
 
@@ -24,7 +24,7 @@ def _import_from_package(module_name, file_name):
     return module
 
 
-class FL_HeartMuLa_Conditioning:
+class SD_HeartMuLa_Conditioning:
     """
     Create conditioning from lyrics and tags for HeartMuLa generation.
 
@@ -35,7 +35,7 @@ class FL_HeartMuLa_Conditioning:
     RETURN_TYPES = ("HEARTMULA_COND",)
     RETURN_NAMES = ("conditioning",)
     FUNCTION = "create_conditioning"
-    CATEGORY = "FL HeartMuLa"
+    CATEGORY = "SD HeartMuLa"
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -97,7 +97,7 @@ class FL_HeartMuLa_Conditioning:
             Tuple containing conditioning dict
         """
         print(f"\n{'='*60}")
-        print(f"[FL HeartMuLa] Creating Conditioning")
+        print(f"[SD HeartMuLa] Creating Conditioning")
         print(f"{'='*60}")
         print(f"Tags: {tags[:80]}{'...' if len(tags) > 80 else ''}")
         print(f"Lyrics preview: {lyrics[:100]}{'...' if len(lyrics) > 100 else ''}")
@@ -135,10 +135,10 @@ class FL_HeartMuLa_Conditioning:
                         # Cache it on the pipeline for next time
                         pipeline._muq_dim = muq_dim
             except Exception as e:
-                print(f"[FL HeartMuLa] Warning: Could not read muq_dim from config: {e}")
+                print(f"[SD HeartMuLa] Warning: Could not read muq_dim from config: {e}")
         
         if muq_dim is None:
-             print("[FL HeartMuLa] Warning: muq_dim not found, defaulting to 512")
+             print("[SD HeartMuLa] Warning: muq_dim not found, defaulting to 512")
              muq_dim = 512
 
         muq_embed = torch.zeros((muq_dim,), dtype=dtype)

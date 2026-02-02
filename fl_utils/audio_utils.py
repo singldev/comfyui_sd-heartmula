@@ -1,5 +1,5 @@
 """
-Audio utilities for FL HeartMuLa.
+Audio utilities for SD HeartMuLa.
 Handles conversion between ComfyUI AUDIO format and HeartMuLa formats.
 """
 
