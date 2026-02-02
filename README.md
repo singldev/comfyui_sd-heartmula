@@ -1,9 +1,6 @@
 # SD HeartMuLa
 
-Multilingual AI music generation nodes for ComfyUI powered by the HeartMuLa model family. Generate full songs with lyrics in English, Chinese, Japanese, Korean, and Spanish.
-
-[![HeartMuLa](https://img.shields.io/badge/HeartMuLa-Original%20Repo-blue?style=for-the-badge&logo=github&logoColor=white)](https://github.com/HeartMuLa/HeartLib)
-[![Patreon](https://img.shields.io/badge/Patreon-Support%20Me-F96854?style=for-the-badge&logo=patreon&logoColor=white)](https://www.patreon.com/Machinedelusions)
+Multilingual AI music generation nodes for ComfyUI powered by the HeartMuLa model family. Generate full songs with lyrics in English, Chinese, Japanese, Korean, Spanish and Russian.
 
 ![Workflow Preview](assets/brave_screenshot.png)
 
