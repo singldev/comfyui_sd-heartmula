@@ -63,9 +63,30 @@ MODEL_VARIANTS = {
 }
 
 
+def get_available_models() -> list:
+    """Scan models directory for potential HeartMuLa model folders."""
+    models = []
+    # Check all registered paths
+    for path in get_all_model_paths():
+        if path.exists():
+            try:
+                for item in path.iterdir():
+                    if item.is_dir():
+                        # Simple heuristic: check for config.json inside
+                        if (item / "config.json").exists():
+                            # Avoid listing the codec itself as a model choice if possible,
+                            # but usually they are distinct. 
+                            models.append(item.name)
+            except Exception:
+                pass
+    return sorted(list(set(models)))
+
+
 def get_variant_list() -> list:
-    """Get list of available model variants."""
-    return list(MODEL_VARIANTS.keys())
+    """Get list of available model variants + scanned folders."""
+    defaults = list(MODEL_VARIANTS.keys())
+    scanned = get_available_models()
+    return sorted(list(set(defaults + scanned)))
 
 
 def get_variant_info(variant: str) -> dict:
@@ -232,9 +253,26 @@ def load_model(
         print(f"[SD HeartMuLa] Using cached model: {variant}")
         return _MODEL_CACHE[cache_key]
 
-    # Download models if needed
-    print(f"[SD HeartMuLa] Checking model files...")
-    models_dir = download_models_if_needed(variant, progress_callback)
+    # Download models if needed (only for known variants)
+    if variant in MODEL_VARIANTS:
+        print(f"[SD HeartMuLa] Checking model files for {variant}...")
+        models_dir = download_models_if_needed(variant, progress_callback)
+        max_duration = MODEL_VARIANTS[variant]["max_duration_ms"]
+    else:
+        # For custom models, find the path
+        models_dir = get_models_directory() # Default fallback
+        found = False
+        for path in get_all_model_paths():
+            if (path / variant).exists():
+                models_dir = path
+                found = True
+                break
+        
+        if not found:
+             print(f"[SD HeartMuLa] Warning: Custom model '{variant}' not found in any registered path. Attempting default...")
+        
+        print(f"[SD HeartMuLa] Loading custom model: {variant}")
+        max_duration = 240000 # Default for custom
 
     # Import HeartMuLa pipeline
     from heartlib import HeartMuLaGenPipeline
@@ -321,7 +359,7 @@ def load_model(
         "device": device,
         "dtype": dtype,
         "sample_rate": 48000,
-        "max_duration_ms": MODEL_VARIANTS[variant]["max_duration_ms"],
+        "max_duration_ms": max_duration,
         "use_4bit": use_4bit,
     }
 
@@ -398,6 +436,7 @@ def get_recommended_memory_mode(variant: str, use_4bit: bool = False) -> str:
         return "ultra"
 
     available_vram = get_available_vram_gb()
+    # Default to 3B specs if unknown
     variant_info = MODEL_VARIANTS.get(variant, MODEL_VARIANTS["3B"])
 
     # Get VRAM requirements based on quantization

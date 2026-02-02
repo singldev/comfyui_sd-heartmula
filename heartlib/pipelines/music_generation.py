@@ -227,13 +227,18 @@ class HeartMuLaGenPipeline:
         # 动态拼接 Codec 路径
         heartcodec_path = os.path.join(pretrained_path, f"HeartCodec-{codec_version}")
         
-        # 动态匹配模型文件夹名称
-        if "RL" in version or "2026" in version:
-            # 匹配 HeartMuLa-RL-oss-3B-20260123 这种格式
-            heartmula_path = os.path.join(pretrained_path, f"HeartMuLa-{version}")
+        # Check if version is a direct folder name
+        direct_path = os.path.join(pretrained_path, version)
+        if os.path.isdir(direct_path):
+            heartmula_path = direct_path
         else:
-            # 匹配原有的 HeartMuLa-oss-3B 格式
-            heartmula_path = os.path.join(pretrained_path, f"HeartMuLa-oss-{version}")
+            # 动态匹配模型文件夹名称
+            if "RL" in version or "2026" in version:
+                # 匹配 HeartMuLa-RL-oss-3B-20260123 这种格式
+                heartmula_path = os.path.join(pretrained_path, f"HeartMuLa-{version}")
+            else:
+                # 匹配原有的 HeartMuLa-oss-3B 格式
+                heartmula_path = os.path.join(pretrained_path, f"HeartMuLa-oss-{version}")
             
         tokenizer = Tokenizer.from_file(os.path.join(pretrained_path, "tokenizer.json"))
         gen_config = HeartMuLaGenConfig.from_file(os.path.join(pretrained_path, "gen_config.json"))
