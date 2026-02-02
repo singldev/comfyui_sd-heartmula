@@ -279,6 +279,16 @@ def load_model(
         print(f"[SD HeartMuLa] Using cached model: {variant} (Codec: {codec_name})")
         return _MODEL_CACHE[cache_key]
 
+    # Enforce single model policy: Unload any other cached models to free VRAM
+    keys_to_remove = [k for k in _MODEL_CACHE.keys() if k != cache_key]
+    if keys_to_remove:
+        print(f"[SD HeartMuLa] Unloading {len(keys_to_remove)} previous model(s) to free VRAM...")
+        for k in keys_to_remove:
+            del _MODEL_CACHE[k]
+        gc.collect()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+
     # Download models if needed (only for known variants)
     if variant in MODEL_VARIANTS:
         print(f"[SD HeartMuLa] Checking model files for {variant}...")
