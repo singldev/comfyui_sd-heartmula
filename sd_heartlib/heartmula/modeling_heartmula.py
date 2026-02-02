@@ -175,6 +175,7 @@ class HeartMuLa(PreTrainedModel):
         for module in self.modules():
             if hasattr(module, "rope_init"):
                 module.rope_init()
+                module.to(device)
 
         self.register_buffer(
             "backbone_causal_mask",
