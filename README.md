@@ -87,7 +87,40 @@ Example: `indie rock, male vocal, melancholic, slow, acoustic guitar`
 | 3B | ~6GB | ~12GB | ~6GB | Released, recommended |
 | 7B | ~14GB | ~24GB | ~12GB | Coming soon |
 
-Models download automatically on first use to `ComfyUI/models/heartmula/`.
+Models download automatically on first use to `ComfyUI/models/HeartMuLa/`.
+
+## File Structure
+
+The node expects models to be placed in `ComfyUI/models/HeartMuLa/`.
+You can place custom fine-tunes or codecs here, and they will be detected by the Model Loader.
+
+**Standard Layout:**
+```
+ComfyUI/
+└── models/
+    └── HeartMuLa/
+        ├── HeartMuLa-oss-3B/       # Main Model (Transformer)
+        │   ├── config.json
+        │   ├── model.safetensors
+        │   └── ...
+        ├── HeartCodec-oss/         # Audio Codec
+        │   ├── config.json
+        │   ├── model.safetensors
+        │   └── ...
+        ├── tokenizer.json          # Shared tokenizer
+        └── gen_config.json         # Generation config
+```
+
+**Custom Models:**
+To use a custom model or codec, simply place it in a subfolder.
+- Select your model folder in the **Model Version** list.
+- Select your codec folder in the **Codec** list.
+
+```
+ComfyUI/models/HeartMuLa/
+├── My-FineTune-v1/         # Appears in "Model Version" list
+├── My-Custom-Codec/        # Appears in "Codec" list (must contain "Codec" in folder name)
+```
 
 ### Memory Modes
 
